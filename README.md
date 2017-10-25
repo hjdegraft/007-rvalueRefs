@@ -1,4 +1,4 @@
-#0x0007 - Rvalue References
+#0x0007 - Rvalue References Move Semantics
 
 ## What is a traditional Rvalue
 A rvalue refers to some temporary value that is lost after this value is assigned to some container. 
@@ -76,12 +76,3 @@ vector<int> Vfunc ();
 func (V) // V is a lvalue and the normal assignment and copy constructor will be called
 func (Vfunc()) // this will call the overloaded function because Vfunc() is a Rvalue
 ```
-
-
-
-
-
-
-
-
-
