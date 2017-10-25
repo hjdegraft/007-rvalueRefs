@@ -65,8 +65,8 @@ Essentially when the assignment operator is overloaded such that the pointers ar
   
 Traditional pass by reference, which were called lvalues, were not modifiable.  So in the case above, we would not be able to swap the temp space
 
-What's important to note here is that when you create code and you want to take advantage of the compiler optimizations with Rvalue 
-References, have to make sure that the call uses a Rvalue that is a non-const.
+### What's important to note here is that when you create code and you want to take advantage of the compiler optimizations with Rvalue 
+### References, have to make sure that the call uses a Rvalue that is a non-const.
 
 For example:
 ```
@@ -76,3 +76,4 @@ vector<int> Vfunc ();
 func (V) // V is a lvalue and the normal assignment and copy constructor will be called
 func (Vfunc()) // this will call the overloaded function because Vfunc() is a Rvalue
 ```
+Continuing on with our simple example, func is the retVec() and Vfunc is the demoRvalRef(), which takes as its input a Rval (e.g. the return value of the retVec()).  Again the value returned from retVec() is a non-const because there is no persistent address pointing to this value.
