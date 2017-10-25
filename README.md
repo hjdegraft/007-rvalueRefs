@@ -48,9 +48,8 @@ So in the pre modern C++, the copy assignment operator (e.g. when we call ``` v 
       ***_will call this cloned_new_vec_***  
   2. Destruct the resource that was held by v // {1,2,3} that was passed into the func() 
   3. Now we are going to attach the clone temp resource to v and then destroy the clone (after func call, because the return value of         func is a Rvalue - does't persist).
+      __v was passed in as a lvalue (a reference), so resource of where v pointed is destroyed and v is replaced with new data.__
       
-      v was passed in as a lvalue (a reference), so value of where v pointed is destroyed and replaced with new data.
-     
 Note: The copy constructor would look similiar.
 
 It would seem more logical, that instead of copying all the data from the temp block into where the resource handler v is pointing, instead we could swap where v pointed originally (e.g. {1,2,3}) and where clone_new_vec points (e.g. {1,2,3,4}) such that now v points to ({1,2,3,4}) and clone_new_vec points to ({1,2,3}).  Now, again, because clone_new_vec is a Rvalue, the Destructor from clone_new_vec will delete the original reference of v and we no longer have to copy all the data.
@@ -59,7 +58,7 @@ It would seem more logical, that instead of copying all the data from the temp b
 So why Rvalue Reference, since reference usually means we can track the memory location and rvalue is the opposite of that concept.
 
 Essentially when the assignment operator is overloaded such that the pointers are swapped, the returned value (or the rhs of the
-  v = retVector call) is being passed as a reference because we need this memory location create the clone and then perform the swap.
+v = retVector() call) is being passed as a reference because we need this memory location in order to create the clone and then perform the swap.
   
 The syntax for calling the overloaded assignment and/or copy constructor is ```X&&```, which is implemented in the overloaded assignment operator and copy constructor.
   
