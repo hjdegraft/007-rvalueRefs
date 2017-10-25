@@ -4,8 +4,8 @@
 A rvalue refers to some temporary value that is lost after this value is assigned to some container. 
 
 ```
-int i = 5; // 0 is a rvalue
-int j = i; // i is not a rlvalue, but a traditional lvalue because its value will continue even after this assignment
+int i = 5; // 5 is a rvalue
+int j = i; // i is not a rvalue, but a traditional lvalue because its value will continue even after this assignment
 int j = i * j; // i * j is a rvalue
 ```
 
@@ -18,7 +18,7 @@ In the last example, although *i * j* (let's call it _comp_val_) was assigned to
 With primitive data, this temporary block copying doesn't seem so harmful.  What if, however, we created a function that returned an object of a more complex nature, such as an array, or vector.
 
 ```
-vector<int> retAppdData (const vector<int>& v, int dataToAppnd)
+vector<int> retVector (const vector<int>& v, int dataToAppnd)
 {
   vector<int> new_vec;
   for (const auto& itr : v) {
@@ -35,13 +35,13 @@ int main () {
   vector<int> v = {1,2,3}; // initialize
   int append = 4;// data to append to newly created vector
   
-  v = retAppdData(v, append);
+  v = retVector(v, append);
   
   return 0;
 }
 ```
 
-Have to return a different vector than the _v_ input parameter because this function is returning a Rvalue, which will not exist after the ``` retAppdData() ``` call.  And the input parameter _v_ has a placeholder or handler somewhere in memory already, therefore it is not modifiable.
+Have to return a different vector than the _v_ input parameter because this function is returning a Rvalue, which will not exist after the ``` retVector() ``` call.  And the input parameter _v_ has a placeholder or handler somewhere in memory already, therefore it is not modifiable.
 
 So in the pre modern C++, the copy assignment operator (e.g. when we call ``` v = retAppdData() ```) looks like this basically:
   -1. Make a clone of the value returned (Rval) from the ***retAppdData()*** // clone the vector that is now _new_vec_ 
