@@ -43,8 +43,8 @@ int main () {
 
 Have to return a different vector than the _v_ input parameter because this function is returning a Rvalue, which will not exist after the ``` retVector() ``` call.  And the input parameter _v_ has a placeholder or handler somewhere in memory already, therefore it is not modifiable.
 
-So in the pre modern C++, the copy assignment operator (e.g. when we call ``` v = retAppdData() ```) looks like this basically:
-  -1. Make a clone of the value returned (Rval) from the ***retAppdData()*** // clone the vector that is now _new_vec_ 
+So in the pre modern C++, the copy assignment operator (e.g. when we call ``` v = retVector() ```) looks like this basically:
+  -1. Make a clone of the value returned (Rval) from the ***retVector()*** // clone the vector that is now _new_vec_ 
       ***_will call this cloned_new_vec_***  
   -2. Destruct the resource that was held by v // {1,2,3} that was passed into the func() 
   -3. Now we are going to attach the clone temp resource is destroyed (after func call, because the return value of func is a Rvalue -       does't persist).
