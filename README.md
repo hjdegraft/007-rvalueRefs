@@ -64,8 +64,7 @@ The syntax for calling the overloaded assignment and/or copy constructor is ```X
   
 Traditional pass by reference, which were called lvalues, were not modifiable.  So in the case above, we would not be able to swap the temp (clone) space with the input param, which was a pass by reference.
 
-### What's important to note here is that when you create code and you want to take advantage of the compiler optimizations with Rvalue 
-### References, have to make sure that the call uses a Rvalue that is a non-const.
+### What's important to note here is that when you create code and you want to take advantage of the compiler optimizations with Rvalue References, have to make sure that the call uses a Rvalue that is a non-const.
 
 For example:
 ```
