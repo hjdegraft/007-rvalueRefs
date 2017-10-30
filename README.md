@@ -1,4 +1,4 @@
-#0x0007 - Rvalue References Move Semantics
+# 0x0007 - Rvalue References Move Semantics
 
 ## What is a traditional Rvalue
 A rvalue refers to some temporary value that is lost after this value is assigned to some container. 
